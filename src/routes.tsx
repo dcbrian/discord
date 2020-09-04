@@ -26,9 +26,7 @@ const routes: RouteConfig[] = [
                 )
             },
             {
-                component: (): JSX.Element => (
-                    <Redirect to="/errors/error-404" />
-                )
+                component: (): JSX.Element => <Redirect to="/errors/error-404" />
             }
         ]
     },
@@ -66,9 +64,7 @@ const routes: RouteConfig[] = [
                 component: (): JSX.Element => <span> THIS IS PRESENTATION</span>
             },
             {
-                component: (): JSX.Element => (
-                    <Redirect to="/errors/error-404" />
-                )
+                component: (): JSX.Element => <Redirect to="/errors/error-404" />
             }
         ]
     }

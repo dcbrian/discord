@@ -31,7 +31,9 @@ const patch = <T>(url: string, body: object, queryParams?: object): Observable<T
 };
 
 const deleteFunc = <T>(url: string, id: number): Observable<T | void> => {
-    return defer(() => axiosInstance.delete(`${url}/${id}`)).pipe(map((result) => result.data));
+    return defer(() => axiosInstance.delete(`${url}/${id}`)).pipe(
+        map((result) => result.data)
+    );
 };
 
 export default { get, post, put, patch, delete: deleteFunc };
