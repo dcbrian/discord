@@ -1,23 +1,19 @@
 import React, { Fragment, useEffect, FC } from 'react';
-import useRouter from './../../utils/useRouter';
+import { useHistory } from 'react-router-dom';
 
 const AuthGuard: FC<Props> = (props: Props) => {
   const { /* roles,*/ children } = props;
 
   const session = { loggedIn: false, user: {} };
 
-  const router = useRouter();
+  const history = useHistory();
 
   useEffect(() => {
     if (!session.loggedIn || !session.user) {
-      router.history.push('/auth/login');
-      return;
+      console.log('passe');
+      history.push('/auth/login');
     }
-
-    // if (!roles.includes(session.user.role)) {
-    //   router.history.push('/errors/error-401');
-    // }
-  }, [router]);
+  }, [history]);
 
   return <Fragment>{children}</Fragment>;
 };
