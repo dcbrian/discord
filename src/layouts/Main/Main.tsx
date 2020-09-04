@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, FC } from 'react';
+import React, { Suspense, FC } from 'react';
 import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
 import { LinearProgress, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
