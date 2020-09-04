@@ -1,2 +1,2 @@
-export { default as http } from './axiosApi';
+export { default as http } from './AxiosApi';
 // import { http } from './utils/http';
