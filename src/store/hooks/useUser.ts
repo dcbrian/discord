@@ -7,10 +7,17 @@ const useUser = (): {
     logout: () => void;
 } => {
     const { state, dispatch } = useStore();
+
     return {
         user: state.user,
-        login: (user: firebase.User | undefined) => dispatch({ type: 'LOGIN', payload: user }),
-        logout: () => dispatch({ type: 'LOGOUT', payload: undefined })
+        login: (user: firebase.User | undefined) => {
+            localStorage.setItem('user', JSON.stringify(user));
+            dispatch({ type: 'LOGIN', payload: user });
+        },
+        logout: () => {
+            localStorage.removeItem('user');
+            dispatch({ type: 'LOGOUT', payload: undefined });
+        }
     };
 };
 

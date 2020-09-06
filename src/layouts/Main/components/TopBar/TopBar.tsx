@@ -50,7 +50,7 @@ const Topbar: FC<TopBarProps> = (props: TopBarProps) => {
                     </IconButton>
                 </Hidden>
 
-                <h2 className={classes.title}>Title</h2>
+                <h2 className={classes.title}>#Server</h2>
                 <div className={classes.flexGrow} />
 
                 <Hidden smDown>

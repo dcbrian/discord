@@ -1,18 +1,30 @@
 import React, { useEffect, FC } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { Drawer, /* Divider, */ Paper, Avatar, Typography, Theme } from '@material-ui/core';
+import {
+    Drawer,
+    /* Divider, */ Paper,
+    Theme,
+    AppBar,
+    Toolbar,
+    Divider
+} from '@material-ui/core';
 import { Hidden } from '@material-ui/core';
-import useUser from '../../../../store/hooks/useUser';
+import Navigation from 'components/Navigation';
+import navigationConfig from './navigationConfig';
+import Profile from './components/Profile';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
-        height: '100%',
-        overflowY: 'auto'
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '1 1 auto',
+        overflow: 'hidden'
     },
     content: {
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        flexGrow: 1
     },
     profile: {
         display: 'flex',
@@ -20,18 +32,15 @@ const useStyles = makeStyles((theme: Theme) => ({
         alignItems: 'center',
         minHeight: 'fit-content'
     },
-    avatar: {
-        width: 60,
-        height: 60
-    },
-    name: {
-        marginTop: theme.spacing(1)
-    },
+
     divider: {
         marginTop: theme.spacing(2)
     },
     navigation: {
         marginTop: theme.spacing(2)
+    },
+    logo: {
+        height: '40px'
     }
 }));
 interface SideBarProps {
@@ -44,42 +53,32 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
 
     const classes = useStyles();
     const location = useLocation();
-    const { user } = useUser();
     useEffect(() => {
         if (openSidebar) {
             onSidebarClose && onSidebarClose();
         }
-    }, [location.pathname, openSidebar, onSidebarClose]);
+        // eslint-disable-next-line
+    }, [location.pathname]);
 
     const navbarContent = (
-        <div className={classes.content}>
-            <div className={classes.profile}>
-                <Avatar
-                    alt="Person"
-                    className={classes.avatar}
-                    component={RouterLink}
-                    src={user?.photoURL ? user?.photoURL : ''}
-                    to="/profile/1/timeline"
-                />
-
-                <Typography className={classes.name} variant="h4">
-                    {user?.displayName}
-                </Typography>
-                {/* <Typography variant="body2">{user?.bio}</Typography> */}
+        <div className={classes.root}>
+            <AppBar style={{ position: 'relative' }} color="secondary">
+                <Toolbar></Toolbar>
+            </AppBar>
+            <div className={classes.content}>
+                <nav>
+                    {navigationConfig.map((list, i) => (
+                        <Navigation
+                            component="div"
+                            key={i}
+                            pages={list.pages}
+                            title={list.title}
+                        />
+                    ))}
+                </nav>
             </div>
-            {/* 
-          <Divider className={classes.divider} />
-          <nav className={classes.navigation}>
-            {navigationConfig.map(list => (
-              <Navigation
-                component="div"
-                key={list.title}
-                pages={list.pages}
-                title={list.title}
-              />
-            ))}
-          </nav>
-    */}
+            <Divider className={classes.divider} />
+            <Profile></Profile>
         </div>
     );
 

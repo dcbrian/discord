@@ -2,8 +2,6 @@ import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import { Card, CardContent, Typography, Divider, Link, Theme } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/Lock';
-import gradients from '../../utils/gradients';
 import LoginForm from './components/LoginForm';
 import ProvidersButton from './components/ProvidersButton';
 
@@ -23,25 +21,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(8, 4, 3, 4)
-    },
-    icon: {
-        backgroundImage: gradients.green,
-        color: '#FFFFFF',
-        borderRadius: theme.shape.borderRadius,
-        padding: theme.spacing(1),
-        position: 'absolute',
-        top: -32,
-        left: theme.spacing(3),
-        height: 64,
-        width: 64,
-        fontSize: 32
+        padding: theme.spacing(4, 4, 3, 4)
     },
     loginForm: {
         marginTop: theme.spacing(2)
     },
     CustomButton: {
-        marginTop: theme.spacing(0)
+        marginTop: theme.spacing(3)
     },
     divider: {
         margin: theme.spacing(2, 0)
@@ -62,13 +48,12 @@ const Login: FC<unknown> = () => {
         <div className={classes.root}>
             <Card className={classes.card}>
                 <CardContent className={classes.content}>
-                    <LockIcon className={classes.icon} />
-                    <Typography gutterBottom variant="h3">
+                    <Typography gutterBottom variant="h3" align="center">
                         Sign in
                     </Typography>
-                    <Typography variant="subtitle2">
+                    {/* <Typography variant="subtitle2">
                         Sign in on the internal platform
-                    </Typography>
+                    </Typography> */}
                     <ProvidersButton className={classes.CustomButton} />
                     <LoginForm className={classes.loginForm} />
                     <Divider className={classes.divider} />
