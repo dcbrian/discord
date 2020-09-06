@@ -5,9 +5,9 @@ import typography from './typography';
 import overrides from './overrides';
 
 const theme = createMuiTheme({
-  palette,
-  typography,
-  overrides
+    palette,
+    typography,
+    overrides
 });
 
 export default theme;

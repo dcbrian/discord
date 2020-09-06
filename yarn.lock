@@ -2026,6 +2026,11 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/re-base@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/re-base/-/re-base-3.2.0.tgz#b2d06efcd94fafbd72328418c6602974760d7d3a"
+  integrity sha512-uH4+X3svBjHbTbJi8ZT3N4dltuTng2B577AAmrkMrVcFdkMEjPYf4VTUMjWUi4OXOFpiSLcuLZrFaDhAxivndw==
+
 "@types/react-dom@*", "@types/react-dom@^16.9.0":
   version "16.9.8"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"

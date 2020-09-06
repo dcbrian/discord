@@ -1,25 +1,28 @@
 import React, { Fragment, useEffect, FC } from 'react';
 import { useHistory } from 'react-router-dom';
+import useUser from '../../store/hooks/useUser';
 
 const AuthGuard: FC<Props> = (props: Props) => {
-    const { /* roles,*/ children } = props;
+    const { /* roles,*/ guarded, children } = props;
 
-    const session = { loggedIn: false, user: {} };
+    const { user } = useUser();
 
     const history = useHistory();
 
     useEffect(() => {
-        if (!session.loggedIn || !session.user) {
-            console.log('passe');
+        if (guarded && !user) {
             history.push('/auth/login');
+        } else if (!guarded && user) {
+            history.push('/presentation');
         }
-    }, [history]);
+    }, [history, user, guarded]);
 
     return <Fragment>{children}</Fragment>;
 };
 
 interface Props {
-    roles: string[]; // Example of user roles: ['GUEST', 'USER', 'ADMIN'];
+    guarded: boolean;
+    roles?: string[]; // Example of user roles: ['GUEST', 'USER', 'ADMIN'];
     children: React.ReactNode;
 }
 

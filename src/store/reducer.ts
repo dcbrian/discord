@@ -1,11 +1,14 @@
 import { effectLogin, effectLogout } from './effects';
-import { State, Action } from './models';
+import { StateType, Action } from './models';
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: Partial<StateType>, action: Action): Partial<StateType> => {
     switch (action.type) {
         case 'LOGIN':
             effectLogin(action);
-            return { ...state, user: { uuid: action.payload } };
+            return {
+                ...state,
+                user: action.payload
+            };
 
         case 'LOGOUT':
             effectLogout();
