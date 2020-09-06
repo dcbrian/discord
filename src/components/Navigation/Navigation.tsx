@@ -34,10 +34,10 @@ const reduceChildRoutes = (props: any) => {
     const { location, items, page, depth } = props;
 
     if (page.children) {
-        const open = matchPath(location.pathname, {
-            path: page.href,
-            exact: false
-        });
+        // const open = matchPath(location.pathname, {
+        //     path: page.href,
+        //     exact: false
+        // });
 
         items.push(
             <NavigationListItem
