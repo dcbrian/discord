@@ -1,11 +1,11 @@
-import React from 'react';
-import { matchPath, useLocation, RouteProps } from 'react-router-dom';
+import React, { FC } from 'react';
+import { /* matchPath,*/ useLocation, RouteProps } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { List, Typography, Theme } from '@material-ui/core';
+import { List, Typography } from '@material-ui/core';
 import NavigationListItem from './components/NavigationListItem';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((/*theme: Theme*/) => ({
     root: {
         // marginBottom: theme.spacing(3)
     },
@@ -72,7 +72,7 @@ interface NavigationProps {
     pages: any[];
     title?: string;
 }
-const Navigation = (props: NavigationProps) => {
+const Navigation: FC<NavigationProps> = (props: NavigationProps) => {
     const { title, pages, className, component: Component, ...rest } = props;
 
     const classes = useStyles();
