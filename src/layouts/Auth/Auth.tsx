@@ -1,7 +1,7 @@
-import React, { Suspense, FC } from 'react';
-import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
 import { LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import React, { FC, Suspense } from 'react';
+import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
 import { AuthGuard } from '../../components';
 
 const useStyles = makeStyles(() => ({

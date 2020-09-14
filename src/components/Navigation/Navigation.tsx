@@ -1,87 +1,76 @@
-import React, { FC } from 'react';
-import { /* matchPath,*/ useLocation, RouteProps } from 'react-router-dom';
-import clsx from 'clsx';
+import {
+    Button,
+    Collapse,
+    colors,
+    List,
+    SvgIconProps,
+    Theme,
+    Typography
+} from '@material-ui/core';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
-import { List, Typography } from '@material-ui/core';
+import clsx from 'clsx';
+import React, { FC, useState } from 'react';
+import { ChannelType } from 'src/store/models';
 import NavigationListItem from './components/NavigationListItem';
 
-const useStyles = makeStyles((/*theme: Theme*/) => ({
+const useStyles = makeStyles((theme: Theme) => ({
     root: {
-        // marginBottom: theme.spacing(3)
+        marginBottom: theme.spacing(3)
     },
-    list: {
-        padding: 0
+    button: {
+        color: colors.blueGrey[800],
+        padding: `6px ${theme.spacing(2)}px`,
+        justifyContent: 'space-between',
+        textTransform: 'none',
+        letterSpacing: 0,
+        width: '100%'
     }
 }));
 
-interface NavigationListProps {
-    depth: number;
-    pages: any[];
-    location: RouteProps['location'];
-}
-const NavigationList = (props: NavigationListProps) => {
-    const { pages, ...rest } = props;
-    const classes = useStyles();
-
-    return (
-        <List className={classes.list}>
-            {pages.reduce((items, page) => reduceChildRoutes({ items, page, ...rest }), [])}
-        </List>
-    );
-};
-
-const reduceChildRoutes = (props: any) => {
-    const { location, items, page, depth } = props;
-
-    if (page.children) {
-        // const open = matchPath(location.pathname, {
-        //     path: page.href,
-        //     exact: false
-        // });
-
-        items.push(
-            <NavigationListItem
-                depth={depth}
-                icon={page.icon}
-                key={page.title}
-                label={page.label}
-                open={true}
-                title={page.title}>
-                <NavigationList depth={depth + 1} pages={page.children} location={location} />
-            </NavigationListItem>
-        );
-    } else {
-        items.push(
-            <NavigationListItem
-                depth={depth}
-                href={page.href}
-                icon={page.icon}
-                key={page.title}
-                label={page.label}
-                title={page.title}
-            />
-        );
-    }
-
-    return items;
-};
-
 interface NavigationProps {
     className?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     component: any;
-    pages: any[];
-    title?: string;
+    pages?: ChannelType[];
+    typeIcon: (props: SvgIconProps) => JSX.Element;
+    label: string;
 }
 const Navigation: FC<NavigationProps> = (props: NavigationProps) => {
-    const { title, pages, className, component: Component, ...rest } = props;
+    const { label, pages, typeIcon, className, component: Component, ...rest } = props;
+
+    const [open, setOpen] = useState(true);
+    const handleToggle = () => {
+        setOpen((open) => !open);
+    };
 
     const classes = useStyles();
-    const location = useLocation();
 
     return (
         <Component {...rest} className={clsx(classes.root, className)}>
-            {title && <Typography variant="overline">{title}</Typography>}
-            <NavigationList depth={0} pages={pages} location={location} />
+            <Button className={classes.button} onClick={handleToggle}>
+                <Typography variant="overline">{label}</Typography>
+                {open ? (
+                    <ExpandLessIcon color="inherit" />
+                ) : (
+                    <ExpandMoreIcon color="inherit" />
+                )}
+            </Button>
+
+            <Collapse in={open}>
+                <List>
+                    {pages &&
+                        pages.map((page) => (
+                            <NavigationListItem
+                                icon={typeIcon}
+                                key={page.title}
+                                title={page.title}
+                                href={page.key}
+                            />
+                        ))}
+                </List>
+            </Collapse>
         </Component>
     );
 };

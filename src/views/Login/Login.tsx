@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import { Card, CardContent, Divider, Link, Theme, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Card, CardContent, Typography, Divider, Link, Theme } from '@material-ui/core';
+import { Spacer } from 'src/components';
 import LoginForm from './components/LoginForm';
 import ProvidersButton from './components/ProvidersButton';
 
@@ -23,14 +24,16 @@ const useStyles = makeStyles((theme: Theme) => ({
         flexGrow: 1,
         padding: theme.spacing(4, 4, 3, 4)
     },
-    loginForm: {
-        marginTop: theme.spacing(2)
-    },
     CustomButton: {
         marginTop: theme.spacing(3)
     },
     divider: {
-        margin: theme.spacing(2, 0)
+        margin: theme.spacing(2, 0),
+        flexGrow: 1
+    },
+    spacer: {
+        display: 'flex',
+        alignItems: 'center'
     },
     person: {
         marginTop: theme.spacing(2),
@@ -51,11 +54,11 @@ const Login: FC<unknown> = () => {
                     <Typography gutterBottom variant="h3" align="center">
                         Sign in
                     </Typography>
-                    {/* <Typography variant="subtitle2">
-                        Sign in on the internal platform
-                    </Typography> */}
+
                     <ProvidersButton className={classes.CustomButton} />
-                    <LoginForm className={classes.loginForm} />
+                    <Spacer label={'OR'} spacing={3} />
+                    <LoginForm />
+
                     <Divider className={classes.divider} />
                     <Link
                         align="center"

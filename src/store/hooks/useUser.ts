@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import { useStore } from '../configureStore';
+import { useUserContext } from '../configureStore';
 
 const useUser = (): {
     user: firebase.User | undefined;
     login: (user: firebase.User | undefined) => void;
     logout: () => void;
 } => {
-    const { state, dispatch } = useStore();
+    const { state, dispatch } = useUserContext();
 
     return {
-        user: state.user,
+        user: state?.user,
         login: (user: firebase.User | undefined) => {
             localStorage.setItem('user', JSON.stringify(user));
             dispatch({ type: 'LOGIN', payload: user });

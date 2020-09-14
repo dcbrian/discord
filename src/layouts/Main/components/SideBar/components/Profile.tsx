@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Theme, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import useUser from 'store/hooks/useUser';
 import clsx from 'clsx';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import useUser from 'src/store/hooks/useUser';
 
 interface Props {
     className?: string;
@@ -12,24 +12,24 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
         display: 'flex',
-        alignItems: 'stretch',
-        minHeight: 'fit-content',
+        flexDirection: 'row',
+        alignItems: 'center',
         padding: theme.spacing(2)
-        // padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
     },
     avatar: {
-        width: 40,
-        height: 40
+        // flexGrow: 1,
+        // width: 40,
+        height: 'auto'
     },
     info: {
-        display: 'flex',
-        flexGrow: 1,
-        paddingLeft: theme.spacing(1),
-        flexDirection: 'column',
-        justifyContent: 'center'
+        // display: 'flex',
+        // flexGrow: 1,
+        paddingLeft: theme.spacing(1)
+        // flexDirection: 'column',
+        // justifyContent: 'center'
     },
     text: {
-        lineHeight: 'normal'
+        // lineHeight: 'normal'
     }
 }));
 

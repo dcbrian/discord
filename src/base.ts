@@ -1,6 +1,7 @@
-import Rebase from 're-base';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import { object, QueryChange } from 'rxfire/database';
+import { Observable } from 'rxjs';
 
 const firebaseApp = firebase.initializeApp({
     apiKey: 'AIzaSyB5aLuZdFrs6PAmGI_uIUaWRlnAnpxXz2Q',
@@ -8,8 +9,20 @@ const firebaseApp = firebase.initializeApp({
     databaseURL: 'https://chatapp-1c783.firebaseio.com'
 });
 
-const base = Rebase.createClass(firebase.database());
+const database = firebase.database();
 
-export { firebaseApp };
+const userChannels$ = (uuid: string): Observable<QueryChange> => {
+    return object(database.ref('users/' + uuid + '/channels'));
+};
 
-export default base;
+const channels$ = (key: string): Observable<QueryChange> => {
+    return object(database.ref('channels/' + key));
+};
+
+const fire$ = (key: string): Observable<QueryChange> => {
+    return object(database.ref(key));
+};
+
+export { database, userChannels$, channels$, fire$ };
+
+export default firebaseApp;

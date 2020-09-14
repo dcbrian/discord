@@ -1,14 +1,13 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
 import { Button, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-
-import glogo from './../../../assets/logo/g_logo.svg';
-import flogo from './../../../assets/logo/f_logo.svg';
+import React from 'react';
+import firebaseApp from 'src/base';
 import useUser from '../../../store/hooks/useUser';
-import { firebaseApp } from '../../../base';
+import flogo from './../../../assets/logo/f_logo.svg';
+import glogo from './../../../assets/logo/g_logo.svg';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -59,16 +58,6 @@ const ProvidersButton = (props: ProvidersButtonProps) => {
             .then((result) => login(result?.user ? result.user : undefined))
             .catch((error) => console.log(error));
     };
-
-    // const handleSuccess = async (result) => {
-    //     const uid = result.user.uid;
-    //     //Retrieve Data
-    //     const box = await base.fetch(uid, { context: this });
-    //     if (!box.rooms) {
-    //         await base.post(`${uid}/rooms`, { data: ['welcome'] });
-    //     }
-    //     // Change Global state
-    // };
 
     return (
         <div className={clsx(classes.root, className)} {...rest}>

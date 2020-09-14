@@ -26,8 +26,8 @@ export default {
         light: colors.red[400]
     },
     text: {
-        primary: colors.blueGrey[900],
-        secondary: colors.blueGrey[600],
+        primary: colors.grey[500],
+        secondary: colors.grey[500],
         link: white
     },
     link: white,

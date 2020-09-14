@@ -1,19 +1,18 @@
-import { StateType, Action } from './models';
+import { Action, UserType } from '../models';
 
-const reducer = (state: Partial<StateType>, action: Action): Partial<StateType> => {
+const userReducer = (state: Partial<UserType>, action: Action): Partial<UserType> => {
     switch (action.type) {
         case 'LOGIN':
             return {
-                ...state,
                 user: action.payload
             };
 
         case 'LOGOUT':
-            return { ...state, user: undefined };
+            return { user: undefined };
 
         default:
             throw new Error(`Unhandled action type: ${action.type}`);
     }
 };
 
-export default reducer;
+export default userReducer;

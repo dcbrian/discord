@@ -1,9 +1,12 @@
-import React, { Suspense, FC, useState } from 'react';
-import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
 import { LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import React, { FC, Suspense, useState } from 'react';
+import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
+import { Switch } from 'react-router-dom';
+import RessourceLoader from 'src/components/RessourceLoader';
+import useUser from 'src/store/hooks/useUser';
 import AuthGuard from '../../components/AuthGuard';
-import { TopBar, SideBar } from './components';
+import { SideBar, TopBar } from './components';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -48,23 +51,30 @@ const Main: FC<RouteConfigComponentProps> = (props: RouteConfigComponentProps) =
     const handleSidebarClose = () => {
         setOpenSidebar(false);
     };
+
+    const { user } = useUser();
+
     return (
         <AuthGuard guarded={true}>
-            <div className={classes.root}>
-                <SideBar
-                    className={classes.sideBar}
-                    onSidebarClose={handleSidebarClose}
-                    openSidebar={openSidebar}
-                />
-                <div className={classes.container}>
-                    <TopBar className={classes.topBar} onSidebarOpen={handleSidebarOpen} />
-                    <main className={classes.content}>
-                        <Suspense fallback={<LinearProgress />}>
-                            {renderRoutes(route?.routes)}
-                        </Suspense>
-                    </main>
+            <RessourceLoader>
+                <div className={classes.root}>
+                    <SideBar
+                        className={classes.sideBar}
+                        onSidebarClose={handleSidebarClose}
+                        openSidebar={openSidebar}
+                    />
+                    <div className={classes.container}>
+                        <TopBar className={classes.topBar} onSidebarOpen={handleSidebarOpen} />
+                        <main className={classes.content}>
+                            <Switch>
+                                <Suspense fallback={<LinearProgress />}>
+                                    {renderRoutes(route?.routes)}
+                                </Suspense>
+                            </Switch>
+                        </main>
+                    </div>
                 </div>
-            </div>
+            </RessourceLoader>
         </AuthGuard>
     );
 };

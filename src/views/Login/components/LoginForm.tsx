@@ -31,58 +31,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface LoginFormProps {
-    className: string;
+    className?: string;
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const LoginForm = (props: LoginFormProps) => {
     const { className, ...rest } = props;
 
     const classes = useStyles();
-
-    // const [formState, setFormState] = useState({
-    //     isValid: false,
-    //     values: {},
-    //     touched: {},
-    //     errors: {}
-    // });
-
-    // useEffect(() => {
-    //     const errors = validate(formState.values, schema);
-
-    //     setFormState((formState) => ({
-    //         ...formState,
-    //         isValid: errors ? false : true,
-    //         errors: errors || {}
-    //     }));
-    // }, [formState.values]);
-
-    // const handleChange = (event) => {
-    //     event.persist();
-
-    //     setFormState((formState) => ({
-    //         ...formState,
-    //         values: {
-    //             ...formState.values,
-    //             [event.target.name]:
-    //                 event.target.type === 'checkbox'
-    //                     ? event.target.checked
-    //                     : event.target.value
-    //         },
-    //         touched: {
-    //             ...formState.touched,
-    //             [event.target.name]: true
-    //         }
-    //     }));
-    // };
-
-    // const handleSubmit = async (event) => {
-    // event.preventDefault();
-    // dispatch(login());
-    // router.history.push('/');
-    // };
-
-    // const hasError = (field) =>
-    //     formState.touched[field] && formState.errors[field] ? true : false;
 
     return (
         <form

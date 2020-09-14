@@ -1,10 +1,10 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
 import React, { lazy } from 'react';
+import { RouteConfig } from 'react-router-config';
 import { Redirect } from 'react-router-dom';
 import { Auth } from './layouts/Auth';
 import { Main } from './layouts/Main';
-import { RouteConfig } from 'react-router-config';
 
 const routes: RouteConfig[] = [
     {
@@ -62,6 +62,15 @@ const routes: RouteConfig[] = [
                 path: '/presentation',
                 exact: true,
                 component: (): JSX.Element => <span> THIS IS PRESENTATION</span>
+            },
+            {
+                path: '/server/:id',
+                exact: true,
+                component: lazy(() =>
+                    import('./views/Channel').then(({ Channel }) => ({
+                        default: Channel
+                    }))
+                )
             },
             {
                 component: (): JSX.Element => <Redirect to="/errors/error-404" />

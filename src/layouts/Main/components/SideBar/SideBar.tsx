@@ -1,18 +1,12 @@
-import React, { useEffect, FC } from 'react';
-import { useLocation } from 'react-router-dom';
-import clsx from 'clsx';
+import { colors, Drawer, Hidden, /* Divider, */ Paper, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import {
-    Drawer,
-    /* Divider, */ Paper,
-    Theme,
-    AppBar,
-    Toolbar,
-    Divider
-} from '@material-ui/core';
-import { Hidden } from '@material-ui/core';
-import Navigation from 'components/Navigation';
-import navigationConfig from './navigationConfig';
+import clsx from 'clsx';
+import React, { FC, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Navigation } from 'src/components';
+import useChannels from 'src/store/hooks/useChannels';
+import useTypes from 'src/store/hooks/useTypes';
+import { Type } from 'src/store/models';
 import Profile from './components/Profile';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,27 +16,24 @@ const useStyles = makeStyles((theme: Theme) => ({
         flex: '1 1 auto',
         overflow: 'hidden'
     },
+    container: {
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column'
+    },
     content: {
-        padding: theme.spacing(2),
+        padding: `${theme.spacing(3)}px 0px`,
         flexGrow: 1
     },
     profile: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: 'fit-content'
-    },
-
-    divider: {
-        marginTop: theme.spacing(2)
-    },
-    navigation: {
-        marginTop: theme.spacing(2)
-    },
-    logo: {
-        height: '40px'
+        backgroundColor: colors.grey['A400'],
+        height: '64px',
+        [theme.breakpoints.down('xs')]: {
+            height: '56px'
+        }
     }
 }));
+
 interface SideBarProps {
     openSidebar: boolean;
     onSidebarClose: () => void;
@@ -53,6 +44,9 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
 
     const classes = useStyles();
     const location = useLocation();
+    const { channels } = useChannels();
+    const { types } = useTypes();
+
     useEffect(() => {
         if (openSidebar) {
             onSidebarClose && onSidebarClose();
@@ -61,24 +55,22 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
     }, [location.pathname]);
 
     const navbarContent = (
-        <div className={classes.root}>
-            <AppBar style={{ position: 'relative' }} color="secondary">
-                <Toolbar></Toolbar>
-            </AppBar>
+        <div className={classes.container}>
+            <Profile className={classes.profile}></Profile>
+
             <div className={classes.content}>
                 <nav>
-                    {navigationConfig.map((list, i) => (
+                    {types?.map((el: Type, i) => (
                         <Navigation
-                            component="div"
                             key={i}
-                            pages={list.pages}
-                            title={list.title}
+                            component="div"
+                            pages={channels?.filter((x) => x.type === i)}
+                            label={el.label}
+                            typeIcon={el.icon}
                         />
                     ))}
                 </nav>
             </div>
-            <Divider className={classes.divider} />
-            <Profile></Profile>
         </div>
     );
 
@@ -90,7 +82,10 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
                     onClose={onSidebarClose}
                     open={openSidebar}
                     variant="temporary">
-                    <div {...rest} className={clsx(classes.root, className)}>
+                    <div
+                        {...rest}
+                        className={clsx(classes.root, className)}
+                        style={{ flexGrow: 1 }}>
                         {navbarContent}
                     </div>
                 </Drawer>

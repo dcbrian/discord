@@ -1,16 +1,14 @@
-import React, { useState, forwardRef, FC } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
+import { Button, colors, ListItem, SvgIconProps, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { ListItem, Button, Collapse, colors, Theme } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import clsx from 'clsx';
+import React, { FC, forwardRef } from 'react';
+import { NavLink as RouterLink, NavLinkProps } from 'react-router-dom';
 
-interface LinkProps {
+type LinkProps = {
     children?: React.ReactNode;
     active: string;
-    to: any;
-}
+} & NavLinkProps;
+
 // eslint-disable-next-line react/display-name
 const CustomRouterLink = forwardRef<HTMLDivElement, LinkProps>((props: LinkProps, ref) => {
     const { active, ...rest } = props;
@@ -22,35 +20,20 @@ const CustomRouterLink = forwardRef<HTMLDivElement, LinkProps>((props: LinkProps
 });
 
 const useStyles = makeStyles((theme: Theme) => ({
-    item: {
-        display: 'block',
-        paddingTop: 0,
-        paddingBottom: 0
-    },
     itemLeaf: {
         display: 'flex',
         paddingTop: 0,
         paddingBottom: 0
     },
-    button: {
-        color: colors.blueGrey[800],
-        padding: '10px 8px',
-        justifyContent: 'flex-start',
-        textTransform: 'none',
-        letterSpacing: 0,
-        width: '100%'
-    },
     buttonLeaf: {
         color: colors.blueGrey[800],
-        padding: '10px 8px',
+        padding: '6px 0px',
         justifyContent: 'flex-start',
         textTransform: 'none',
         letterSpacing: 0,
         width: '100%',
-        fontWeight: theme.typography.fontWeightRegular,
-        '&.depth-0': {
-            fontWeight: theme.typography.fontWeightMedium
-        }
+        borderRadius: 0,
+        fontWeight: theme.typography.fontWeightRegular
     },
     icon: {
         color: /*theme.palette.icon*/ '#FFFFF',
@@ -63,12 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: 16,
         width: 16
     },
-    label: {
-        display: 'flex',
-        alignItems: 'center',
-        marginLeft: 'auto'
-    },
     active: {
+        backgroundColor: 'lightgrey',
         color: theme.palette.primary.main,
         fontWeight: theme.typography.fontWeightMedium,
         '& $icon': {
@@ -80,85 +59,33 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface NavigationListItemProps {
     children?: React.ReactNode;
     className?: string;
-    depth: number;
-    href?: string;
-    icon?: FC<any>;
-    label?: FC;
-    open?: boolean;
     title: string;
+    href: string;
+    icon?: (props: SvgIconProps) => JSX.Element;
 }
 
 const NavigationListItem: FC<NavigationListItemProps> = (props: NavigationListItemProps) => {
-    const {
-        title,
-        href,
-        depth,
-        children,
-        icon: Icon,
-        className,
-        open: openProp,
-        label: Label,
-        ...rest
-    } = props;
+    const { title, href, icon: Icon, className, ...rest } = props;
 
     const classes = useStyles();
-    console.log(openProp);
-    const [open, setOpen] = useState(openProp);
-
-    const handleToggle = () => {
-        setOpen((open) => !open);
-    };
-
-    let paddingLeft = 8;
-
-    if (depth > 0) {
-        paddingLeft = 32 + 8 * depth;
-    }
 
     const style = {
-        paddingLeft
+        paddingLeft: 16
     };
 
-    if (children) {
-        return (
-            <ListItem {...rest} className={clsx(classes.item, className)} disableGutters>
-                <Button className={classes.button} onClick={handleToggle} style={style}>
-                    {Icon && <Icon className={classes.icon} />}
-                    {title}
-                    {open ? (
-                        <ExpandLessIcon className={classes.expandIcon} color="inherit" />
-                    ) : (
-                        <ExpandMoreIcon className={classes.expandIcon} color="inherit" />
-                    )}
-                </Button>
-                <Collapse in={open}>{children}</Collapse>
-            </ListItem>
-        );
-    } else {
-        return (
-            <ListItem {...rest} className={clsx(classes.itemLeaf, className)} disableGutters>
-                <Button
-                    style={style}
-                    className={clsx(classes.buttonLeaf, `depth-${depth}`)}
-                    component={CustomRouterLink}
-                    active={classes.active}
-                    to={href}>
-                    {Icon && <Icon className={classes.icon} />}
-                    {title}
-                    {Label && (
-                        <span className={classes.label}>
-                            <Label />
-                        </span>
-                    )}
-                </Button>
-            </ListItem>
-        );
-    }
+    return (
+        <ListItem {...rest} className={clsx(classes.itemLeaf, className)} disableGutters>
+            <Button
+                style={style}
+                className={classes.buttonLeaf}
+                component={CustomRouterLink}
+                active={classes.active}
+                to={'/server/' + href}>
+                {Icon && <Icon fontSize="small" className={classes.icon} />}
+                {title}
+            </Button>
+        </ListItem>
+    );
 };
-
-NavigationListItem.defaultProps = {
-    depth: 0,
-    open: false
-} as Partial<NavigationListItemProps>;
 
 export default NavigationListItem;

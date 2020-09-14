@@ -1,8 +1,14 @@
-import React, { Fragment, useEffect, FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useUser from '../../store/hooks/useUser';
 
-const AuthGuard: FC<Props> = (props: Props) => {
+interface GuardProps {
+    guarded: boolean;
+    roles?: string[]; // Example of user roles: ['GUEST', 'USER', 'ADMIN'];
+    children: React.ReactNode;
+}
+
+const AuthGuard: FC<GuardProps> = (props: GuardProps) => {
     const { /* roles,*/ guarded, children } = props;
 
     const { user } = useUser();
@@ -17,13 +23,8 @@ const AuthGuard: FC<Props> = (props: Props) => {
         }
     }, [history, user, guarded]);
 
-    return <Fragment>{children}</Fragment>;
+    console.log('auth');
+    return <>{children}</>;
 };
-
-interface Props {
-    guarded: boolean;
-    roles?: string[]; // Example of user roles: ['GUEST', 'USER', 'ADMIN'];
-    children: React.ReactNode;
-}
 
 export default AuthGuard;
