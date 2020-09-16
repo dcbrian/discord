@@ -1,26 +1,23 @@
 import React, { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
+import seo from 'src/seo';
 
 interface Props {
-    title: string;
     description: string;
+    className: string;
     children?: ReactNode;
 }
 // title={post.frontmatter.title}
 // description={post.frontmatter.description || post.excerpt}
-export const Page = (props: Props) => {
-    const { title, description, children, ...rest } = props;
+export const Page = (props: Props): JSX.Element => {
+    const { description, children, ...rest } = props;
     return (
         <div {...rest}>
             <Helmet>
                 <html lang="en"></html>
                 <meta charSet="utf-8" />
-                <title>{title}</title>
+                <title>{seo.siteMetadata.title}</title>
                 <meta name="description" content={description} />
-                <meta name="og:title" content={title} />
-                <meta name="og:description" content={description} />
-                <meta name="og:type" content="website" />
-                <meta name="description" content="Helmet application" />
             </Helmet>
             {children}
         </div>

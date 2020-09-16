@@ -66,7 +66,8 @@ const ProvidersButton = (props: ProvidersButtonProps) => {
                 variant="contained"
                 color="primary"
                 disableElevation
-                onClick={authenticate}>
+                onClick={authenticate}
+                disabled={true}>
                 <img className={classes.img} alt="facebook" src={flogo} />
 
                 <span>Facebook</span>

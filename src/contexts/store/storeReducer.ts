@@ -20,7 +20,7 @@ const reducer = (state: Partial<StateType>, action: Action): Partial<StateType> 
             return { ...state, channels: res };
 
         case 'RESET':
-            return {};
+            return { ...state, channels: undefined };
 
         default:
             throw new Error(`Unhandled action type: ${action.type}`);

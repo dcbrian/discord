@@ -30,7 +30,6 @@ const App: FC = () => {
                 <ThemeProvider theme={theme}>
                     <Router history={history}>
                         <ScrollReset />
-
                         {renderRoutes(routes)}
                     </Router>
                 </ThemeProvider>

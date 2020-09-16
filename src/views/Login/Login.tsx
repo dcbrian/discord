@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Spacer } from 'src/components';
+import { Page } from 'src/components/Page/Page';
 import LoginForm from './components/LoginForm';
 import ProvidersButton from './components/ProvidersButton';
 
@@ -48,7 +49,7 @@ const Login: FC<unknown> = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <Page className={classes.root} description="login page">
             <Card className={classes.card}>
                 <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h3" align="center">
@@ -71,7 +72,7 @@ const Login: FC<unknown> = () => {
                     </Link>
                 </CardContent>
             </Card>
-        </div>
+        </Page>
     );
 };
 

@@ -59,9 +59,9 @@ const Navigation: FC<NavigationProps> = (props: NavigationProps) => {
             </Button>
 
             <Collapse in={open}>
-                <List>
-                    {pages &&
-                        pages.map((page) => (
+                {pages && pages.length > 0 && (
+                    <List>
+                        {pages.map((page) => (
                             <NavigationListItem
                                 icon={typeIcon}
                                 key={page.title}
@@ -69,7 +69,8 @@ const Navigation: FC<NavigationProps> = (props: NavigationProps) => {
                                 href={page.key}
                             />
                         ))}
-                </List>
+                    </List>
+                )}
             </Collapse>
         </Component>
     );
