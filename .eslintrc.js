@@ -22,6 +22,6 @@ module.exports = {
     ],
     rules: {
         indent: 'off',
-        'react-hooks/exhaustive-deps': 0
+        'react-hooks/exhaustive-deps': 'off'
     }
 };

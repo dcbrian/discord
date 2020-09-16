@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react';
+import { AtomSpinner } from 'react-epic-spinners';
 import { Subject } from 'rxjs';
 import { filter, flatMap, takeUntil } from 'rxjs/operators';
 import { channels$, userChannels$ } from 'src/base';
 import useChannels from 'src/contexts/hooks/useChannels';
 import useTypes from 'src/contexts/hooks/useTypes';
 import useUser from 'src/contexts/user/actions';
-import { Spinner } from '../Spinner/Spinner';
 
 interface Props {
     children?: React.ReactNode;
@@ -17,7 +17,6 @@ const RessourceLoader: FC<Props> = (props: Props) => {
     const { channels, addChannels } = useChannels();
     const { types } = useTypes();
 
-    // eslint-disable-next-line
     useEffect(() => {
         const destroy$ = new Subject();
 
@@ -37,6 +36,7 @@ const RessourceLoader: FC<Props> = (props: Props) => {
             destroy$.next();
             destroy$.complete();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [channels]);
 
     return types && channels ? (
@@ -50,7 +50,7 @@ const RessourceLoader: FC<Props> = (props: Props) => {
                 height: '100%'
             }}>
             {/* <span>LOADING DATA ...</span> */}
-            <Spinner></Spinner>
+            <AtomSpinner size={120} />
         </div>
     );
 };
