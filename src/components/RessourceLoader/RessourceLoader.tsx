@@ -14,9 +14,9 @@ const RessourceLoader: FC<Props> = (props: Props) => {
     const { children } = props;
     const { user } = useUser();
     const { channels, addChannels } = useChannels();
-    const { types, addTypes } = useTypes();
+    const { types } = useTypes();
 
-    // console.log(channels);
+    // eslint-disable-next-line
     useEffect(() => {
         const destroy$ = new Subject();
 
