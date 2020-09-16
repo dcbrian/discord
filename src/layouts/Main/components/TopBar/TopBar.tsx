@@ -1,11 +1,11 @@
-import React, { useState, FC } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { AppBar, Toolbar, Badge, Hidden, IconButton, Theme, Button } from '@material-ui/core';
+import { AppBar, Badge, Button, Hidden, IconButton, Theme, Toolbar } from '@material-ui/core';
+import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
-import InputIcon from '@material-ui/icons/Input';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import useUser from '../../../../store/hooks/useUser';
+import React, { FC, useState } from 'react';
+import useUser from 'src/contexts/user/actions';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {

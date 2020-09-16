@@ -5,9 +5,10 @@ import { renderRoutes } from 'react-router-config';
 import { Router } from 'react-router-dom';
 import './assets/scss/index.scss';
 import { ScrollReset } from './components';
+import { StoreProvider } from './contexts/store/configStoreContext';
+import { UserProvider } from './contexts/user/configUserContext';
+import { UserType } from './contexts/user/userContextModels';
 import routes from './routes';
-import { StoreProvider, UserProvider } from './store/configureStore';
-import { UserType } from './store/models';
 import theme from './theme';
 
 const history = createBrowserHistory();
@@ -24,7 +25,7 @@ const App: FC = () => {
     const initialUser = initialize();
 
     return (
-        <UserProvider initialUser={initialUser}>
+        <UserProvider initial={initialUser}>
             <StoreProvider>
                 <ThemeProvider theme={theme}>
                     <Router history={history}>

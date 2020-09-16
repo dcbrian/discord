@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { FC, useState } from 'react';
-import { ChannelType } from 'src/store/models';
+import { ChannelType } from 'src/contexts/store/storeModels';
 import NavigationListItem from './components/NavigationListItem';
 
 const useStyles = makeStyles((theme: Theme) => ({

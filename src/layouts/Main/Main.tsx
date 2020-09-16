@@ -4,7 +4,6 @@ import React, { FC, Suspense, useState } from 'react';
 import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
 import { Switch } from 'react-router-dom';
 import RessourceLoader from 'src/components/RessourceLoader';
-import useUser from 'src/store/hooks/useUser';
 import AuthGuard from '../../components/AuthGuard';
 import { SideBar, TopBar } from './components';
 
@@ -51,8 +50,6 @@ const Main: FC<RouteConfigComponentProps> = (props: RouteConfigComponentProps) =
     const handleSidebarClose = () => {
         setOpenSidebar(false);
     };
-
-    const { user } = useUser();
 
     return (
         <AuthGuard guarded={true}>

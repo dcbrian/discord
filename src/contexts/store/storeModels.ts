@@ -22,15 +22,3 @@ export interface StateType {
 }
 
 export type Action = { type: string; payload?: any };
-
-// ********* User *********
-// ********       *********
-// ******* Provider *******
-
-export interface UserContextProps {
-    state: Partial<UserType>;
-    dispatch: (action: Action) => void;
-}
-export interface UserType {
-    user: firebase.User;
-}

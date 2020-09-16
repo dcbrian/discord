@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import React, { FC, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navigation } from 'src/components';
-import useChannels from 'src/store/hooks/useChannels';
-import useTypes from 'src/store/hooks/useTypes';
-import { Type } from 'src/store/models';
+import useChannels from 'src/contexts/hooks/useChannels';
+import useTypes from 'src/contexts/hooks/useTypes';
+import { Type } from 'src/contexts/store/storeModels';
 import Profile from './components/Profile';
 
 const useStyles = makeStyles((theme: Theme) => ({

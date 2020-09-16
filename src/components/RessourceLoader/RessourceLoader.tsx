@@ -2,9 +2,9 @@ import React, { FC, useEffect } from 'react';
 import { Subscription } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { channels$, fire$, userChannels$ } from 'src/base';
-import useChannels from 'src/store/hooks/useChannels';
-import useTypes from 'src/store/hooks/useTypes';
-import useUser from 'src/store/hooks/useUser';
+import useChannels from 'src/contexts/hooks/useChannels';
+import useTypes from 'src/contexts/hooks/useTypes';
+import useUser from 'src/contexts/user/actions';
 import getIcon from 'src/utils/icons';
 
 interface Props {
@@ -39,10 +39,10 @@ const RessourceLoader: FC<Props> = (props: Props) => {
             });
 
         return () => {
-            console.log('exit');
             sub.forEach((e: Subscription) => e.unsubscribe());
         };
     }, []);
+
     return types && channels ? (
         <>{children}</>
     ) : (

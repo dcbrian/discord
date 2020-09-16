@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { useStoreContext } from '../configureStore';
-import { ChannelType } from '../models';
+import { useStoreContext } from '../store/configStoreContext';
+import { ChannelType } from '../store/storeModels';
 
 interface props {
     channels: ChannelType[] | undefined;

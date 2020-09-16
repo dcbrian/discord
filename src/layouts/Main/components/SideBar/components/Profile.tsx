@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import useUser from 'src/store/hooks/useUser';
+import useUser from 'src/contexts/user/actions';
 
 interface Props {
     className?: string;

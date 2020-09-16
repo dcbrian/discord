@@ -1,19 +1,18 @@
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import useUser from '../../store/hooks/useUser';
+import useUser from 'src/contexts/user/actions';
 
 interface GuardProps {
     guarded: boolean;
-    roles?: string[]; // Example of user roles: ['GUEST', 'USER', 'ADMIN'];
     children: React.ReactNode;
 }
 
 const AuthGuard: FC<GuardProps> = (props: GuardProps) => {
-    const { /* roles,*/ guarded, children } = props;
-
-    const { user } = useUser();
+    const { guarded, children } = props;
 
     const history = useHistory();
+
+    const { user } = useUser();
 
     useEffect(() => {
         if (guarded && !user) {
@@ -23,7 +22,6 @@ const AuthGuard: FC<GuardProps> = (props: GuardProps) => {
         }
     }, [history, user, guarded]);
 
-    console.log('auth');
     return <>{children}</>;
 };
 

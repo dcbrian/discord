@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { useStoreContext } from '../configureStore';
-import { Type } from '../models';
+import { useStoreContext } from '../store/configStoreContext';
+import { Type } from '../store/storeModels';
 
 interface props {
     types: Type[] | undefined;

@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import React from 'react';
 import firebaseApp from 'src/base';
-import useUser from '../../../store/hooks/useUser';
+import useUser from 'src/contexts/user/actions';
 import flogo from './../../../assets/logo/f_logo.svg';
 import glogo from './../../../assets/logo/g_logo.svg';
 
