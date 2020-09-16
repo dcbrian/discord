@@ -5,6 +5,7 @@ import { channels$, userChannels$ } from 'src/base';
 import useChannels from 'src/contexts/hooks/useChannels';
 import useTypes from 'src/contexts/hooks/useTypes';
 import useUser from 'src/contexts/user/actions';
+import { Spinner } from '../Spinner/Spinner';
 
 interface Props {
     children?: React.ReactNode;
@@ -48,7 +49,8 @@ const RessourceLoader: FC<Props> = (props: Props) => {
                 justifyContent: 'center',
                 height: '100%'
             }}>
-            <span>LOADING DATA ...</span>
+            {/* <span>LOADING DATA ...</span> */}
+            <Spinner></Spinner>
         </div>
     );
 };
